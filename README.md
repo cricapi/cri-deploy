@@ -16,9 +16,7 @@ Learn More about the API Here - <https://github.com/mskian/cricket-api>
 
 - Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fmskian%2Fcri-deploy)
-
-- Update Live Match URL in `config.php` File
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fcricapi%2Fcri-deploy)
 
 ## Disclaimer 🗃
 
