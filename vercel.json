@@ -1,8 +1,38 @@
 {
-    "version": 2,
-    "cleanUrls": true,
-    "builds": [
-        { "src": "*.php", "use": "vercel-php@0.5.2" },
-        { "src": "*.txt", "use": "@vercel/static" }
-      ]
-  }
+  "version": 2,
+  "builds": [
+      {
+          "src": "./index.py",
+          "use": "@vercel/python"
+      }
+  ],
+  "rewrites": [
+      {
+          "source": "/(.*)",
+          "destination": "/"
+      }
+  ],
+  "headers": [
+      {
+          "source": "/(.*)",
+          "headers": [
+              {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+              },
+              {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+              },
+              {
+                  "key": "X-XSS-Protection",
+                  "value": "1; mode=block"
+              },
+              {
+                  "key": "x-robots-tag",
+                  "value": "noindex, nofollow"
+              }
+          ]
+      }
+  ]
+}
