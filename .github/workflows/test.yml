@@ -1,4 +1,4 @@
-name: Score Test
+name: run index.py
 
 on:
   push:
@@ -8,16 +8,36 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      matrix:
-        operating-system: [ ubuntu-22.04 ]
-        php: ['7.4', '8.0', '8.1']
-    name: PHP ${{ matrix.php }} API Test
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.3
-      - name: Setup PHP
-        uses: nanasess/setup-php@v4.0.0
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+
+      - name: setup python
+        uses: actions/setup-python@v4
         with:
-          php-version: ${{ matrix.php }}
-      - run: php live.php
+          python-version: '3.9' # install the python version needed
+          
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: execute py script # run main.py
+        env:
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
+        run: python index.py
+          
+      - name: commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+          
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main 
