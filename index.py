@@ -11,7 +11,7 @@ import pytz
 app = Flask(__name__)
 app.json.sort_keys = False
 cors = CORS(app, resources={
-            r"/score/*": {"origins": [r'^https://.+sanweb.info$', r'^https://.+mskian.com$']}})
+            r"/score/*": {"origins": "*"}})
 
 user_agent_list = [
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
