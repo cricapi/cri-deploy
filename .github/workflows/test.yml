@@ -21,7 +21,7 @@ jobs:
           
       - name: install python packages
         run: |
-          python -m pip==24.3.1 install --upgrade pip
+          python -m pip install
           pip install -r requirements.txt
           
       - name: execute py script # run index.py
